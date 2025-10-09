@@ -10,11 +10,11 @@ import org.junit.jupiter.api.Test;
 
 public class EnrollmentYearTest {
 
-    static final String validYear = "2025";
-    static final String otherValidYear = "2024";
-    static final String zeroYear = "0";
-    static final String invalidYear = "20-20";
-    static final String emptyYear = "";
+    static final String VALID_YEAR = "2025";
+    static final String OTHER_VALID_YEAR = "2024";
+    static final String ZERO_YEAR = "0";
+    static final String INVALID_YEAR = "20-20";
+    static final String EMPTY_YEAR = "";
 
     @Test
     public void constructor_nullYear_throwsIllegalArgumentException() {
@@ -23,25 +23,25 @@ public class EnrollmentYearTest {
 
     @Test
     public void constructor_invalidYear_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new EnrollmentYear(invalidYear));
+        assertThrows(IllegalArgumentException.class, () -> new EnrollmentYear(INVALID_YEAR));
     }
 
     @Test
     public void constructor_nonPositiveYear_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new EnrollmentYear(zeroYear));
+        assertThrows(IllegalArgumentException.class, () -> new EnrollmentYear(ZERO_YEAR));
     }
 
     @Test
     public void constructor_emptyYear_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new EnrollmentYear(emptyYear));
+        assertThrows(IllegalArgumentException.class, () -> new EnrollmentYear(EMPTY_YEAR));
     }
 
     @Test
     public void equals() {
-        EnrollmentYear enrollmentYear = new EnrollmentYear(validYear);
+        EnrollmentYear enrollmentYear = new EnrollmentYear(VALID_YEAR);
 
         // same values -> returns true
-        assertTrue(enrollmentYear.equals(new EnrollmentYear(validYear)));
+        assertTrue(enrollmentYear.equals(new EnrollmentYear(VALID_YEAR)));
 
         // same object -> returns true
         assertTrue(enrollmentYear.equals(enrollmentYear));
@@ -53,24 +53,24 @@ public class EnrollmentYearTest {
         assertFalse(enrollmentYear.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(enrollmentYear.equals(new EnrollmentYear(otherValidYear)));
+        assertFalse(enrollmentYear.equals(new EnrollmentYear(OTHER_VALID_YEAR)));
     }
 
     @Test
     public void toStringMethod() {
-        final EnrollmentYear enrollmentYear = new EnrollmentYear(validYear);
-        final String expected = validYear;
+        final EnrollmentYear enrollmentYear = new EnrollmentYear(VALID_YEAR);
+        final String expected = VALID_YEAR;
         assertEquals(expected, enrollmentYear.toString());
     }
 
     @Test
     public void hashCodeMethod() {
-        final EnrollmentYear enrollmentYear = new EnrollmentYear(validYear);
+        final EnrollmentYear enrollmentYear = new EnrollmentYear(VALID_YEAR);
 
         // equal objects returns same hash code
-        assertEquals(enrollmentYear.hashCode(), new EnrollmentYear(validYear).hashCode());
+        assertEquals(enrollmentYear.hashCode(), new EnrollmentYear(VALID_YEAR).hashCode());
 
         // different objects return different hash codes
-        assertNotEquals(enrollmentYear.hashCode(), new EnrollmentYear(otherValidYear).hashCode());
+        assertNotEquals(enrollmentYear.hashCode(), new EnrollmentYear(OTHER_VALID_YEAR).hashCode());
     }
 }
