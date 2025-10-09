@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.EnrollmentYear;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -28,6 +29,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private EmergencyContact emergencyContact;
+    private EnrollmentYear enrollmentYear;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -39,6 +41,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         emergencyContact = null;
+        enrollmentYear = null;
     }
 
     /**
@@ -100,8 +103,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code EnrollmentYear} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEnrollmentYear(String year) {
+        this.enrollmentYear = new EnrollmentYear(year);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags, emergencyContact);
+        return new Person(name, phone, email, address, tags, emergencyContact, enrollmentYear);
     }
 
 }

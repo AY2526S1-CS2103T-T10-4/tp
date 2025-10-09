@@ -15,7 +15,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null (except optional fields below), field values are validated, immutable.
- * Optional fields: [emergencyContact].
+ * Optional fields: [emergencyContact, enrollmentYear].
  */
 public class Person {
 
@@ -31,12 +31,13 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final EmergencyContact emergencyContact;
+    private final EnrollmentYear enrollmentYear;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  EmergencyContact emergencyContact) {
+                  EmergencyContact emergencyContact, EnrollmentYear enrollmentYear) {
         requireAllNonNull(name, phone, email, address, tags);
         checkArgument(isValidPerson(phone, emergencyContact), MESSAGE_CONSTRAINTS);
         this.name = name;
@@ -45,6 +46,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.emergencyContact = emergencyContact;
+        this.enrollmentYear = enrollmentYear;
     }
 
     /**
@@ -83,6 +85,10 @@ public class Person {
 
     public Optional<EmergencyContact> getEmergencyContact() {
         return Optional.ofNullable(emergencyContact);
+    }
+
+    public Optional<EnrollmentYear> getEnrollmentYear() {
+        return Optional.ofNullable(enrollmentYear);
     }
 
     /**
