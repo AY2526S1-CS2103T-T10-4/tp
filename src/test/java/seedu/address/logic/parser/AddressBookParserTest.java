@@ -82,7 +82,7 @@ public class AddressBookParserTest {
     }
     @Test
     public void parseCommand_listphone() throws Exception {
-        assertTrue(parser.parseCommand(ListPhoneCommand.COMMAND_WORD) instanceof ListPhoneCommand);
+        assertTrue(parser.parseCommand(ConsolidatePhoneCommand.COMMAND_WORD) instanceof ConsolidatePhoneCommand);
     }
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {

@@ -9,14 +9,14 @@ import java.util.Collections;
 import java.util.HashSet;
 import static java.util.Objects.requireNonNull;
 
-public class ListPhoneCommand extends Command {
+public class ConsolidatePhoneCommand extends Command {
 
-    public static final String COMMAND_WORD = "list:phone";
+    public static final String COMMAND_WORD = "consolidate:phone";
 
-    public static final String MESSAGE_SUCCESS = "List all distinct students' phone:";
+    public static final String MESSAGE_SUCCESS = "Consolidate all distinct students' phone:";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": list all distinct students' phone numbers currently in address book. \n"
+            + ": consolidate all distinct students' phone numbers currently in address book. \n"
             + "If two students have same phone number, phone number only appears once.";
 
     @Override
