@@ -1,14 +1,18 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import static java.util.Objects.requireNonNull;
 
+/**
+ * Consolidate all the student's phone number.
+ */
 public class ConsolidatePhoneCommand extends Command {
 
     public static final String COMMAND_WORD = "consolidate:phone";
