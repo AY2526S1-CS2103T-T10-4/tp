@@ -31,7 +31,7 @@ public class Phone {
      */
     public static boolean isValidPhone(String test) {
         try {
-            test = test.replaceAll("[\\s-]","");
+            test = test.replaceAll("[\\s-]", "");
             if (test.length() != 8) {
                 return false;
             }
