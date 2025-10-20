@@ -1,14 +1,15 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.testutil.TypicalPersons;
-
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
 
 public class ConsolidatePhoneCommandTest {
 
@@ -27,7 +28,7 @@ public class ConsolidatePhoneCommandTest {
         } else {
             commandResult += DANIEL.getPhone() + "\n" + CARL.getPhone();
         }
-        assertCommandSuccess(new ConsolidatePhoneCommand(), model, commandResult ,model);
+        assertCommandSuccess(new ConsolidatePhoneCommand(), model, commandResult, model);
     }
 
 
