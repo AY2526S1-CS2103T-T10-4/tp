@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.testutil.TypicalPersons;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -16,7 +15,7 @@ public class ConsolidatePhoneCommandTest {
 
     @Test
     public void execute_validAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager();
         model.setAddressBook(new AddressBook());
         model.addPerson(TypicalPersons.CARL);
         model.addPerson(TypicalPersons.DANIEL);
