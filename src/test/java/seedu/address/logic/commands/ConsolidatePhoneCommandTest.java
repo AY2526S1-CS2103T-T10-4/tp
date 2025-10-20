@@ -30,7 +30,4 @@ public class ConsolidatePhoneCommandTest {
         }
         assertCommandSuccess(new ConsolidatePhoneCommand(), model, commandResult, model);
     }
-
-
-
 }
