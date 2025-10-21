@@ -1,0 +1,15 @@
+title: "CCAmper"
+theme: minima
+
+header_pages:
+  - UserGuide.md
+  - DeveloperGuide.md
+  - AboutUs.md
+
+markdown: kramdown
+
+repository: AY2526S1-CS2103T-T10-4/tp"
+github_icon: "images/github-icon.png"
+
+plugins:
+  - jemoji
