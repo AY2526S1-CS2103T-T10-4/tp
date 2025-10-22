@@ -108,7 +108,8 @@
       "src": "UserGuide.md",
       "title": "User Guide",
       "headings": {
-        "ccamper-user-guide": "CCAmper User Guide",
+        "ccamper-user-guide": "CCAmper  User Guide",
+        "welcome-to-ccamper": "Welcome to CCAmper!",
         "quick-start": "Quick start",
         "features": "Features",
         "successful-commands": "Successful Commands",
@@ -121,8 +122,9 @@
         "deleting-a-person-delete": "Deleting a person : delete",
         "clearing-all-entries-clear": "Clearing all entries : clear",
         "exiting-the-program-exit": "Exiting the program : exit",
-        "saving-the-data": "Saving the data",
+        "saving-of-data": "Saving of data",
         "editing-the-data-file": "Editing the data file",
+        "planned-updates": "Planned updates",
         "faq": "FAQ",
         "known-issues": "Known issues",
         "command-summary": "Command summary"
