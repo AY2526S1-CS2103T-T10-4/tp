@@ -13,7 +13,6 @@ import seedu.address.testutil.TypicalPersons;
 
 public class ConsolidatePhoneCommandTest {
 
-
     @Test
     public void execute_validAddressBook_success() {
         Model model = new ModelManager();
@@ -31,6 +30,14 @@ public class ConsolidatePhoneCommandTest {
             commandResult += DANIEL.getPhone() + "\n" + CARL.getPhone();
         }
 
+        assertCommandSuccess(new ConsolidatePhoneCommand(), model, commandResult, model);
+    }
+
+    @Test
+    public void execute_emptyAddressBook_success() {
+        Model model = new ModelManager();
+        model.setAddressBook(new AddressBook());
+        String commandResult = ConsolidatePhoneCommand.ALTERNATE_MESSAGE_SUCCESS;
         assertCommandSuccess(new ConsolidatePhoneCommand(), model, commandResult, model);
     }
 }
