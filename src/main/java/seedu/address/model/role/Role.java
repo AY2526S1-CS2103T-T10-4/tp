@@ -9,6 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Role {
     public static final String MESSAGE_CONSTRAINTS = "Role names should be alphanumeric with spaces.";
+    public static final String FIND_MESSAGE_CONSTRAINTS = "Supplied substrings for roles should be "
+            + "alphanumeric with spaces, or empty.";
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9 ]+$";
 
     public final String roleName;
@@ -29,6 +31,13 @@ public class Role {
      */
     public static boolean isValidRoleName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string is a valid role name.
+     */
+    public static boolean isValidFindString(String test) {
+        return test.isEmpty() || test.matches(VALIDATION_REGEX);
     }
 
     @Override

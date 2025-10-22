@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENROLL_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ import seedu.address.model.person.EnrollmentYearPredicate;
 import seedu.address.model.person.MultiPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.role.Role;
+import seedu.address.model.role.RolesContainSubstringsPredicate;
 import seedu.address.model.tag.TagsContainKeywordsPredicate;
 
 /**
@@ -25,11 +28,14 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
-     * with exactly one prefix specified, and returns a FindCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * and returns a FindCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform to the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG, PREFIX_ENROLL_YEAR);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG,
+                PREFIX_ROLE, PREFIX_ENROLL_YEAR);
+
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
@@ -70,6 +76,19 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
 
             predicates.add(new TagsContainKeywordsPredicate(Arrays.asList(tagKeywords)));
+        }
+
+        if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
+            List<String> roleStrings = argMultimap.getAllValues(PREFIX_ROLE);
+
+            // Throws an error if invalid role is supplied
+            for (String s : roleStrings) {
+                if (!Role.isValidFindString(s.trim())) {
+                    throw new ParseException(Role.FIND_MESSAGE_CONSTRAINTS);
+                }
+            }
+
+            predicates.add(new RolesContainSubstringsPredicate(roleStrings));
         }
 
         if (argMultimap.getValue(PREFIX_ENROLL_YEAR).isPresent()) {
