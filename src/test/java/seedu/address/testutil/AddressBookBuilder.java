@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.Comparator;
+
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 
@@ -25,6 +27,14 @@ public class AddressBookBuilder {
      */
     public AddressBookBuilder withPerson(Person person) {
         addressBook.addPerson(person);
+        return this;
+    }
+
+    /**
+     * Sets the sorting method of the {@code AddressBook} that we are building.
+     */
+    public AddressBookBuilder withSort(Comparator<Person> personComparator) {
+        addressBook.sort(personComparator);
         return this;
     }
 

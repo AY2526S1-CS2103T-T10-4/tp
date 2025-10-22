@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ENROLLMENT_YEAR_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_SECRETARY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -34,7 +36,7 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withAddress(VALID_ADDRESS_BOB).withRoles(VALID_ROLE_SECRETARY).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -49,6 +51,10 @@ public class PersonTest {
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+
+        // pinned value differs, all other attributes same -> returns true
+        editedBob = new PersonBuilder(BOB).withPin(false).build();
+        assertTrue(BOB.isSamePerson(editedBob));
     }
 
     @Test
@@ -88,12 +94,37 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different enrollmentYear -> returns false
+        editedAlice = new PersonBuilder(ALICE).withEnrollmentYear(VALID_ENROLLMENT_YEAR_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
+                + ", roles=" + ALICE.getRoles() + ", tags=" + ALICE.getTags()
+                + ", pin=" + ALICE.getPin() + ", emergencyContact=" + ALICE.getEmergencyContact().orElse(null)
+                + ", enrollmentYear=" + ALICE.getEnrollmentYear().toString() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void isValidPerson() {
+        Phone phoneA = new Phone("98765432");
+        Phone phoneB = new Phone("91234567");
+        Email emailA = new Email("tester@example.com");
+        Email emailB = new Email("admin@example.com");
+        EmergencyContact emergencyContactA = new EmergencyContact("Father", phoneA.value, emailA.value);
+
+        // invalid person
+        assertFalse(Person.isValidPerson(phoneA, emailB, emergencyContactA)); // same phone as emergency contact
+        assertFalse(Person.isValidPerson(phoneB, emailA, emergencyContactA)); // same email as emergency contact
+        assertFalse(Person.isValidPerson(phoneA, emailA, emergencyContactA)); // same phone + email as emergency contact
+
+        // valid person
+        assertTrue(Person.isValidPerson(phoneA, emailA, null)); // emergency contact is optional
+        assertTrue(Person.isValidPerson(phoneB, emailB, emergencyContactA)); // valid emergency contact
     }
 }

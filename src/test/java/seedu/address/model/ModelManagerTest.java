@@ -15,8 +15,11 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.util.SortUtil;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
 
@@ -70,6 +73,54 @@ public class ModelManagerTest {
         Path path = Paths.get("address/book/file/path");
         modelManager.setAddressBookFilePath(path);
         assertEquals(path, modelManager.getAddressBookFilePath());
+    }
+
+    @Test
+    public void setAddressBook_validAddressBook_setsAddressBook() {
+        AddressBook addressBook = new AddressBookBuilder()
+                .withPerson(new PersonBuilder().withName("A").build())
+                .build();
+        modelManager.setAddressBook(addressBook);
+        assertEquals(addressBook, modelManager.getAddressBook());
+    }
+
+    @Test
+    public void getAddressBook_noSort_sortedByDefaultPinOrder() {
+        Person unpinnedA = new PersonBuilder().withName("A").withPin(false).build();
+        Person unpinnedB = new PersonBuilder().withName("B").withPin(false).build();
+        Person pinnedC = new PersonBuilder().withName("C").withPin(true).build();
+        modelManager.addPerson(unpinnedA);
+        modelManager.addPerson(unpinnedB);
+        modelManager.addPerson(pinnedC);
+
+        AddressBook expected = new AddressBookBuilder()
+                .withPerson(unpinnedA)
+                .withPerson(unpinnedB)
+                .withPerson(pinnedC)
+                .withSort(SortUtil.SORT_DEFAULT_PIN)
+                .build();
+
+        assertEquals(expected, modelManager.getAddressBook());
+    }
+
+    @Test
+    public void getAddressBook_validSort_sortedByAscendingNameOrder() {
+        Person unpinnedA = new PersonBuilder().withName("A").withPin(false).build();
+        Person unpinnedB = new PersonBuilder().withName("B").withPin(false).build();
+        Person pinnedC = new PersonBuilder().withName("C").withPin(true).build();
+        modelManager.addPerson(pinnedC);
+        modelManager.addPerson(unpinnedA);
+        modelManager.addPerson(unpinnedB);
+        modelManager.sortAddressBook(SortUtil.SORT_NAME_ALPHABETICAL_ASC);
+
+        AddressBook expected = new AddressBookBuilder()
+                .withSort(SortUtil.SORT_NAME_ALPHABETICAL_ASC)
+                .withPerson(unpinnedA)
+                .withPerson(unpinnedB)
+                .withPerson(pinnedC)
+                .build();
+
+        assertEquals(expected, modelManager.getAddressBook());
     }
 
     @Test

@@ -9,14 +9,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Names should not be blank, bracket sequences in names should be"
+            + " matched, and names should only contain alphanumeric characters, spaces, and the following characters: "
+            + ".,-'()";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}.,\\-'()][\\p{Alnum}.,\\-'() ]*";
 
     public final String fullName;
 
@@ -35,9 +36,10 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        final boolean hasValidCharacters = test.matches(VALIDATION_REGEX);
+        final boolean hasBalancedBrackets = checkBalancedBrackets(test);
+        return hasValidCharacters && hasBalancedBrackets;
     }
-
 
     @Override
     public String toString() {
@@ -64,4 +66,21 @@ public class Name {
         return fullName.hashCode();
     }
 
+    /**
+     * Returns true if the given string has a balanced bracket matching.
+     */
+    private static boolean checkBalancedBrackets(String s) {
+        int openBracketCount = 0;
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                openBracketCount++;
+            } else if (c == ')') {
+                openBracketCount--;
+            }
+            if (openBracketCount < 0) {
+                return false;
+            }
+        }
+        return openBracketCount == 0;
+    }
 }

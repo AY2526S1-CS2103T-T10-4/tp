@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -14,10 +16,12 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -77,6 +81,33 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_deletePersonThenEmptyList_personSelectedReturnsNull() throws CommandException {
+        Model model = new ModelManager();
+        Person firstPerson = new PersonBuilder().build();
+        model.addPerson(firstPerson);
+        model.setSelectedPerson(firstPerson);
+        assertEquals(firstPerson, model.getSelectedPerson());
+
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        deleteCommand.execute(model);
+        assertNull(model.getSelectedPerson());
+    }
+
+    @Test
+    public void execute_deletePersonThenNonEmptyList_firstPersonSelected() throws CommandException {
+        Index lastPersonIndex = Index.fromOneBased(model.getFilteredPersonList().size());
+        Person lastPerson = model.getFilteredPersonList().get(lastPersonIndex.getZeroBased());
+        model.setSelectedPerson(lastPerson);
+
+        DeleteCommand deleteCommand = new DeleteCommand(lastPersonIndex);
+        Person firstPerson = model.getFilteredPersonList().get(0);
+        deleteCommand.execute(model);
+
+        assertEquals(firstPerson, model.getSelectedPerson());
+        assertNotEquals(lastPerson, model.getSelectedPerson());
     }
 
     @Test

@@ -8,8 +8,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Phone {
-
-
     public static final String MESSAGE_CONSTRAINTS =
             "Expected 8 digit Singapore phone number that starts with 3/6/8/9." + "\n"
             + "This phone number should only contain numbers." + "\n";
@@ -39,12 +37,10 @@ public class Phone {
             if (firstDigit == 3 || firstDigit == 6 || firstDigit == 8 || firstDigit == 9) {
                 Integer.parseInt(test);
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             return false;
         }
     }

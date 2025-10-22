@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Person;
 
 /**
@@ -17,7 +18,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+            "Multiple values specified for the following single-valued field(s): ";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -43,8 +44,28 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Tags: ");
+                .append("; Roles: ");
+        person.getRoles().forEach(builder::append);
+
+        builder.append("; Tags: ");
         person.getTags().forEach(builder::append);
+
+        builder.append("; Enrollment Year: ")
+               .append(person.getEnrollmentYear());
+
+        builder.append("; Pinned: ")
+                .append(person.getPin());
+
+        if (person.getEmergencyContact().isPresent()) {
+            EmergencyContact emergencyContact = person.getEmergencyContact().get();
+            builder.append("; Emergency Contact Name: ")
+                    .append(emergencyContact.name)
+                    .append("; Emergency Contact Phone: ")
+                    .append(emergencyContact.phone)
+                    .append("; Emergency Contact Email: ")
+                    .append(emergencyContact.email);
+        }
+
         return builder.toString();
     }
 

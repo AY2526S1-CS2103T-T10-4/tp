@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<VBox   xmlns="http://javafx.com/javafx/17"
+        xmlns:fx="http://javafx.com/fxml/1"
+        style="-fx-padding: 15 15 15 15;">
+    <Label fx:id="title" underline="true" maxWidth="Infinity" text="Welcome to CCAmper!" alignment="TOP_CENTER"
+        wrapText="true" textAlignment="CENTER" contentDisplay="RIGHT" VBox.vgrow="SOMETIMES"
+           style=" -fx-font-size: 30.0;
+                -fx-padding: 0 0 15 0;">
+        <ImageView fx:id="tentIcon" fitWidth="40.0" fitHeight="40.0"/>
+    </Label>
+
+    <Label fx:id="description" maxWidth="Infinity" alignment="TOP_CENTER" VBox.vgrow="ALWAYS"
+           text="We are designed to solve your CCA management needs.
+&#10;First time user? Type in `help` and visit our website!
+&#10;&#10;List of available commands:
+&#10;- Add          - List
+&#10;- Edit          - Find
+&#10;- Delete       - Exit" wrapText="true"
+           style="-fx-font-size: 20.0;"/>
+</VBox>

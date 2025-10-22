@@ -123,6 +123,92 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
     }
 
+
+    //---------------- Tests for containsSubstringIgnoreCase --------------------------------------
+
+    /*
+     * Invalid equivalence partitions for substring: null, empty, multiple words
+     * Invalid equivalence partitions for sentence: null
+     * The four test cases below test one invalid input at a time.
+     */
+
+    @Test
+    public void containsSubstringIgnoreCase_nullSubstring_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsSubstringIgnoreCase("typical sentence",
+                null));
+    }
+
+    @Test
+    public void containsSubstringIgnoreCase_emptySubstring_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, "Substring parameter cannot be empty", ()
+                -> StringUtil.containsSubstringIgnoreCase("typical sentence", "  "));
+    }
+
+    @Test
+    public void containsSubstringIgnoreCase_multipleSubstrings_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, "Substring parameter should be a single word", ()
+                -> StringUtil.containsSubstringIgnoreCase("typical sentence", "aaa BBB"));
+    }
+
+    @Test
+    public void containsSubstringIgnoreCase_nullSentence_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsSubstringIgnoreCase(null, "abc"));
+    }
+
+    /*
+     * Valid equivalence partitions for substring:
+     *   - any substring
+     *   - substring containing symbols/numbers
+     *   - substring with leading/trailing spaces
+     *
+     * Valid equivalence partitions for sentence:
+     *   - empty string
+     *   - one word
+     *   - multiple words
+     *   - sentence with extra spaces
+     *
+     * Possible scenarios returning true:
+     *   - matches first word in sentence
+     *   - last word in sentence
+     *   - middle word in sentence
+     *   - matches multiple words
+     *   - matches strict substring of first/middle/last word in sentence
+     *   - matches strict substring of multiple words
+     *
+     * Possible scenarios returning false:
+     *   - sentence word matches part of the query substring
+     *   - query substring is broken up by spaces in sentence
+     *
+     * The test method below tries to verify all above with a reasonably low number of test cases.
+     */
+
+    @Test
+    public void containsSubstringIgnoreCase_validInputs_correctResult() {
+
+        // Empty sentence
+        assertFalse(StringUtil.containsSubstringIgnoreCase("", "abc")); // Boundary case
+        assertFalse(StringUtil.containsSubstringIgnoreCase("    ", "123"));
+
+        // Matches a partial word only
+        assertFalse(StringUtil.containsSubstringIgnoreCase("a bbb ccc", "bbbb")); // Substring bigger than sentence word
+        assertFalse(StringUtil.containsSubstringIgnoreCase("a bbb ccc", "bbcc")); // Substring broken up by spaces
+
+        // Matches word/substring in the sentence, different upper/lower case letters
+        assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bBb ccc", "Bbb")); // First word (boundary case)
+        assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bBb ccc@1", "CCc@1")); // Last word (boundary case)
+        assertTrue(StringUtil.containsSubstringIgnoreCase("  AAA   bBb   ccc  ", "aaa")); // Sentence has extra spaces
+        assertTrue(StringUtil.containsSubstringIgnoreCase("Aaa", "aaa")); // Only one word in sentence (boundary case)
+        assertTrue(StringUtil.containsSubstringIgnoreCase("Aaa", "a")); // Only one char in sentence (boundary case)
+        assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc", "  ccc  ")); // Leading/trailing spaces
+        assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bBb ccc", "aa")); // Substring of first word
+        assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bBb ccc", "bb")); // Substring of middle word
+        assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bBb ccc", "cc")); // Substring of last word
+
+        // Matches multiple words in sentence
+        assertTrue(StringUtil.containsSubstringIgnoreCase("AAA bBb ccc  bbb", "bbB")); // Exact match of multiple words
+        assertTrue(StringUtil.containsSubstringIgnoreCase("AAA bBb ccc  bbb", "bb")); // Substring of multiple words
+    }
+
     //---------------- Tests for getDetails --------------------------------------
 
     /*

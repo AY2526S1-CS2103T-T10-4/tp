@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      style="-fx-padding: 15 15 15 15;">
+    <GridPane VBox.vgrow="ALWAYS">
+        <rowConstraints>
+            <RowConstraints vgrow="ALWAYS"/>
+        </rowConstraints>
+        <VBox GridPane.columnIndex="0" GridPane.hgrow="SOMETIMES"/>
+        <VBox GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES" alignment="TOP_CENTER">
+            <Label fx:id="name" style="-fx-font-size: 40;" wrapText="true" maxHeight="125">
+                <!-- maxHeight to ensure max 2 line wrap -->
+                <ImageView fx:id="pinIcon" fitHeight="30.0" fitWidth="30.0"/>
+            </Label>
+
+            <FlowPane fx:id="roles" style="-fx-padding: 5 0 5 0;" alignment="TOP_CENTER"/>
+            <FlowPane fx:id="tags" style="-fx-padding: 5 0 20 0;" alignment="TOP_CENTER"/>
+
+            <Label fx:id="phone" graphicTextGap="10.0">
+                <ImageView fx:id="phoneIcon" fitHeight="25.0" fitWidth="25.0"/>
+            </Label>
+
+            <Label fx:id="email" graphicTextGap="10.0" wrapText="true">
+                <ImageView fx:id="emailIcon" fitHeight="25.0" fitWidth="25.0"/>
+            </Label>
+
+            <Label fx:id="address" graphicTextGap="10.0" wrapText="true">
+                <ImageView fx:id="addressIcon" fitHeight="25.0" fitWidth="25.0"/>
+            </Label>
+
+            <Label fx:id="year" graphicTextGap="10.0" wrapText="true">
+                <ImageView fx:id="yearIcon" fitHeight="25.0" fitWidth="25.0"/>
+            </Label>
+
+            <VBox VBox.vgrow="ALWAYS" />
+
+            <VBox fx:id="emergencyTitle" maxWidth="Infinity" alignment="TOP_CENTER" style="
+            -fx-padding: 5 15 15 15;
+            -fx-border-insets: 30 0 0 0; -fx-background-insets: 30 0 0 0;
+            -fx-background-color: #824910; -fx-background-radius: 18.0;
+            -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 16.0;">
+                <Label text="Emergency Contact" maxWidth="Infinity" alignment="TOP_CENTER" underline="true"
+                       style="-fx-font-size: 30.0;"/>
+                <Label fx:id="emergencyName" wrapText="true" graphicTextGap="10.0">
+                    <ImageView fx:id="emergencyNameIcon" fitHeight="20.0" fitWidth="20.0"/>
+                </Label>
+                <Label fx:id="emergencyPhone" wrapText="true" graphicTextGap="10.0">
+                    <ImageView fx:id="emergencyPhoneIcon" fitHeight="20.0" fitWidth="20.0"/>
+                </Label>
+                <Label fx:id="emergencyEmail" wrapText="true" graphicTextGap="10.0">
+                    <ImageView fx:id="emergencyEmailIcon" fitHeight="20.0" fitWidth="20.0"/>
+                </Label>
+            </VBox>
+        </VBox>
+        <VBox GridPane.columnIndex="2" GridPane.hgrow="SOMETIMES"/>
+    </GridPane>
+</VBox>

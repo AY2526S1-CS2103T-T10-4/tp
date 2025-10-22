@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:id="detailedPanel"
+            >
+    <stylesheets>
+        <URL value="@DetailedPanel.css" />
+    </stylesheets>
+    <VBox fx:id="helpPanelPlaceholder" styleClass="pane-with-border-dark"/>
+    <VBox fx:id="personPanelPlaceholder" styleClass="pane-with-border-dark"/>
+</StackPane>

@@ -2,9 +2,11 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.SortUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -12,10 +14,12 @@ import seedu.address.model.person.UniquePersonList;
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
+ * AddressBook is sorted according to the specified sort method at all times.
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private Comparator<Person> sortMethod = SortUtil.SORT_DEFAULT_PIN;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -73,6 +77,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Person p) {
         persons.add(p);
+        sort();
     }
 
     /**
@@ -82,8 +87,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
+        sort();
     }
 
     /**
@@ -92,6 +97,22 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    //// sort methods
+
+    /** Sorts the contents of the person list with the current AddressBook sort method. */
+    public void sort() {
+        persons.sort(sortMethod);
+    }
+
+    /**
+     * Sets the AddressBook sorting method to the newly provided sort method,
+     * and then sorts the contents of the person list.
+     */
+    public void sort(Comparator<Person> personComparator) {
+        sortMethod = personComparator;
+        persons.sort(personComparator);
     }
 
     //// util methods

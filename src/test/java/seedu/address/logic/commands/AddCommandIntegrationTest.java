@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -45,4 +47,11 @@ public class AddCommandIntegrationTest {
                 AddCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
+    @Test
+    public void execute_newPerson_personIsSelected() throws CommandException {
+        Person validPerson = new PersonBuilder().withName("Selected").build();
+        AddCommand addCommand = new AddCommand(validPerson);
+        addCommand.execute(model);
+        assertEquals(validPerson, model.getSelectedPerson());
+    }
 }

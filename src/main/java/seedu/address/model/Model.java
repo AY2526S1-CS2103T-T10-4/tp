@@ -1,10 +1,12 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 
 /**
@@ -52,6 +54,9 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
+    /** Sorts the AddressBook */
+    void sortAddressBook(Comparator<Person> personComparator);
+
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
@@ -84,4 +89,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+
+    /** Returns the selected person in the filtered person list. */
+    Person getSelectedPerson();
+
+    /** Sets the selected person in the filtered person list. */
+    void setSelectedPerson(Person p);
+
+    /** Sets the selected person to the person at the specified index in the filtered person list. */
+    void setSelectedPerson(Index i);
 }

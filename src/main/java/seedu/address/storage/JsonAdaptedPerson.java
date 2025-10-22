@@ -12,9 +12,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.EnrollmentYear;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Pin;
+import seedu.address.model.role.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,6 +32,10 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String enrollmentYear;
+    private final Boolean pin;
+    private final JsonAdaptedEmergencyContact emergencyContact;
+    private final List<JsonAdaptedRole> roles = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -35,12 +43,26 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("pin") Boolean pin,
+                             @JsonProperty("emergencyContact") JsonAdaptedEmergencyContact emergencyContact,
+                             @JsonProperty("enrollmentYear") String enrollmentYear,
+                             @JsonProperty("roles") List<JsonAdaptedRole> roles,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.pin = pin;
+        this.emergencyContact = emergencyContact;
+        if (enrollmentYear != null) {
+            this.enrollmentYear = enrollmentYear;
+        } else {
+            this.enrollmentYear = "";
+        }
+        if (roles != null) {
+            this.roles.addAll(roles);
+        }
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -54,6 +76,16 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        pin = source.getPin().value;
+        if (source.getEmergencyContact().isPresent()) {
+            emergencyContact = new JsonAdaptedEmergencyContact(source.getEmergencyContact().get());
+        } else {
+            emergencyContact = null;
+        }
+        enrollmentYear = source.getEnrollmentYear().toString();
+        roles.addAll(source.getRoles().stream()
+                .map(JsonAdaptedRole::new)
+                .collect(Collectors.toList()));
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -65,6 +97,11 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        final List<Role> personRoles = new ArrayList<>();
+        for (JsonAdaptedRole role : roles) {
+            personRoles.add(role.toModelType());
+        }
+
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
@@ -102,8 +139,22 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (pin == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Pin.class.getSimpleName()));
+        }
+        final Pin modelPin = new Pin(pin);
+
+        EmergencyContact modelEmergencyContact = null;
+        if (emergencyContact != null) {
+            modelEmergencyContact = emergencyContact.toModelType();
+        }
+
+        final EnrollmentYear modelEnrollmentYear = new EnrollmentYear(enrollmentYear);
+
+        final Set<Role> modelRoles = new HashSet<>(personRoles);
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPin,
+                modelRoles, modelTags, modelEmergencyContact, modelEnrollmentYear);
     }
 
 }
