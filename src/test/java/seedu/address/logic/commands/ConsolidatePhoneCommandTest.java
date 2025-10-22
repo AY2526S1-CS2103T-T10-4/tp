@@ -21,6 +21,8 @@ public class ConsolidatePhoneCommandTest {
         model.addPerson(TypicalPersons.CARL);
         model.addPerson(TypicalPersons.DANIEL);
         String commandResult = ConsolidatePhoneCommand.MESSAGE_SUCCESS + "\n";
+
+        // note: CARL's phone number is currently larger than DANIEL's phone number
         if (CARL.getPhone().toString().compareTo(DANIEL.getPhone().toString()) < 0) {
             commandResult += CARL.getPhone() + "\n" + DANIEL.getPhone();
         } else if (CARL.getPhone().toString().compareTo(DANIEL.getPhone().toString()) == 0) {
@@ -28,6 +30,7 @@ public class ConsolidatePhoneCommandTest {
         } else {
             commandResult += DANIEL.getPhone() + "\n" + CARL.getPhone();
         }
+
         assertCommandSuccess(new ConsolidatePhoneCommand(), model, commandResult, model);
     }
 }

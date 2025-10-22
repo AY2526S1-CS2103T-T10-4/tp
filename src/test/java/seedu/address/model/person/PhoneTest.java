@@ -40,8 +40,8 @@ public class PhoneTest {
         assertTrue(Phone.isValidPhone("81818112"));
         assertTrue(Phone.isValidPhone("8181-8112"));
         assertTrue(Phone.isValidPhone(" 8181 8162 "));
-
-
+        assertTrue(Phone.isValidPhone(" 81--81 81 62 "));
+        assertTrue(Phone.isValidPhone(" 8181   8162 "));
     }
 
     @Test
