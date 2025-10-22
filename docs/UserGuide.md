@@ -4,50 +4,34 @@
   pageNav: 3
 ---
 
-# CCAmper :fa-solid-campground: User Guide
+# CCAmper User Guide
+
+CCAmper is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, CCAmper can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
-## Welcome to CCAmper!
-CCAmper is the perfect app for **secondary school teachers** as an all-in-one desktop app for 
-- Managing all your various CCA student details plus emergency contact details
-- Keeping track of critical information such as their dietary restrictions 
-- Keeping track of their attendance and performance.
-
-CCAmper is optimized for use via a
-<tooltip content="Command Line Interface">**CLI**</tooltip> to help secondary school teachers who are fast-typers to 
-**plan, manage, and simplify** your CCA's weekly tasks faster than traditional 
-<tooltip content="Graphical User Interface">GUI</tooltip> apps.
-
 
 ## Quick start
 
-1. Download and install Java `17` or above from this 
-   <a href="https://www.oracle.com/java/technologies/downloads/#java17">Java downloads page</a>.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed 
-   [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).<br> {{ verifyJava17 }}
+1. Ensure you have Java `17` or above installed in your Computer.<br>
+   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-2. Download our latest CCAmper `.jar` file from our [GitHub page](https://github.com/AY2526S1-CS2103T-T10-4/tp/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-T10-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook. 
-   <br>We recommend placing the `.jar` file into a folder named `CCAmper` on your desktop for easy access.
+1. Copy the file to the folder you want to use as the _home folder_ for CCAmper.
 
-3. Open a command terminal, {{ navigate }} into the folder containing the `.jar` file, 
-   and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
-
-<br>
-   <img src="images/Ui.png" width="600" height="450"/>
-<br><br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to CCAmper.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -55,7 +39,7 @@ CCAmper is optimized for use via a
 
    * `exit` : Exits the app.
 
-2. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -68,10 +52,10 @@ CCAmper is optimized for use via a
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in **square brackets** are optional.<br>
+* Items in square brackets are optional.<br>
   * e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
   * e.g `n/NAME [enroll/[YEAR]]` can be used as `n/John enroll/` or as `n/John enroll/2024` or as `n/John`.
-    
+
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend family` etc.
 
@@ -85,67 +69,55 @@ CCAmper is optimized for use via a
 </box>
 
 ### Successful Commands
-
 Succesful commands should look like such:
-
-<img src="images/successfulCommand.png" height="120" width="800"/>
-<br><br>
-
+![successful command](images/successfulCommand.png)
 ### Invalid Commands
 A warning message will be provided for invalid commands with text providing help on command usage:
-
-<img src="images/invalidCommand.png" height="120" width="800"/>
-<br><br>
-
+![invalid command](images/invalidCommand.png)
 ### Viewing help : `help`
 
-A popup appears which redirects the user to this current page. :D
+Shows a message explaining how to access the help page.
 
-<img src="images/helpMessage.png" alt="Help Message Window" height="80" width="650"/>
-<br><br>
+![help message](images/helpMessage.png)
+
+Format: `help`
+
 
 ### Adding a person: `add`
 
-Add students to your address book, with the given fields.
+Adds a person to CCAmper.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE]…​ [t/TAG]…​ [pin/] [enroll/YEAR] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE] [ece/EMERGENCY_EMAIL]`
 
+<box type="tip" seamless>
+
+**Tip:** A person can have any number of tags (including 0)
+</box>
+
+<div markdown="span" class="info info-primary">:info: **Note:**
+Persons are considered duplicates if they have the same name
+</div>
+
 Additional information on fields:
-* While one may key in phone numbers with hyphen(s) and/or space(s) to improve human-readability, the hyphen(s) and space(s) are automatically removed when phone number is stored in app.
+* While one may key in phone numbers with hyphen(s) and/or space(s) to improve human-readability, the hyphen(s) and space(s) are automatically removed when phone number is stored in app"
 * The emergency contact fields (`ecn, ecp, ece`) must be either all provided or not at all.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/president r/camp leader ecn/Jack Doe ecp/99998888 ece/jackd@example.com enroll/2022 t/friend`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/98765432 t/criminal enroll/2024`
 
-<box type="tip">
-
-**Tip:** A person can have any number of tags (including 0)
-</box>
-
-<box type="definition">
-
-**Note:**
-Persons are considered duplicates if they have the same name
-</box>
-
-<br>
-
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in CCAmper.
 
 Format: `list`
 
 It should look like this:
-
-<img src="images/list.png" width="650" height="400"/>
-
-<br><br>
+![list](images/list.png)
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in CCAmper.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​ [t/TAG]…​ [pin/(TRUE/FALSE)] [enroll/[YEAR]] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE] [ece/EMERGENCY_EMAIL]`
 
@@ -166,22 +138,19 @@ Examples:
 *  `edit 3 n/Jack Wilson r/` Edits the name of the 3rd person to be `Jack Wilson` and clears all existing roles.
 *  `edit 1 n/John p/98765432 e/johndoe@example.com a/New Place r/Senior Student t/experienced pin/TRUE enroll/2022 ecn/Sally ecp/88887777 ece/sally@example2.com`
 
-### Locating persons by fields: `find`
+### Locating persons by name: `find`
 
-Display a list of persons satisfying the search constraint.
-
-Format: `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<\|<=\|>\|>=\|=)NUMBER]]`
+Finds persons by fields.
 
 Available prefixes
 - Name: `n/` (Name containing any of the keywords)
 - Enrollment Year: `enroll/` (Enrollment year satisfy constraints)
 - Tag: `t/` (Any tag containing any of the keywords)
 
-Format: `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<\|<=\|>\|>=\|=)NUMBER]] 
-[r/SUBSTRING]…​`
+Format: `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<\|<=\|>\|>=\|=)NUMBER]]`
 
 * At least one prefix must be provided.
-* If different prefixes are provided, a list of persons matching ALL the given constraints are shown.
+* Different prefixes can be provided in one command to search for persons matching all those fields.
 
 Name:
 * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -203,51 +172,30 @@ Enrollment Year:
 * For e.g. `<2025` will return contacts that enrolled in `2024` or earlier.
 * A empty string can also be provided to find contacts without an enrollment year
 
-Role:
-* The search is case-insensitive. e.g. `president` will match `President`.
-* A role matches a search string if the string is a substring of the role. e.g. `section` will match `Section Leader`.
-* Unlike previous cases, we can search for a string with spaces e.g. `r/section leader` will match `Section Leader` 
-  but not `Section Head`.
-* To search for multiple roles, we supply the `r/` tag multiple times e.g. `r/section r/leader` matches both 
-  `Section Head` and `Group Leader`.
-* A person is matched and returned if any of their roles matches any of the searched strings.
-* We can match all people with roles by giving an empty substring e.g. `find r/`.
-
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/yu john enroll/>=2022` returns `John`, `Bernice Yu`<br>
-
-<img src="images/findCommand.png" width="400" height="500"/>
-
-* `find r/lead r/sec` returns `Arthur John`, `Carl Jun`, `Dominic Low`<br>
-<img src="images/findCommand2.png" width="400" height="500"/>
-
-<br><br>
+  ![result for 'find n/yu john enroll/>=2022'](images/findCommand.png)
 
 ### Deleting a person : `delete`
 
-Deletes the person at the current index. Cannot be undone.
+Deletes the specified person from CCAmper.
 
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the currently displayed person list.
+* The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-<br>
-
 ### Clearing all entries : `clear`
 
-<box type="warning">
+Clears all entries from CCAmper.
 
-**Warning:** Deletes all entries from the address book. Not undoable.
-</box>
-
-<br>
+Format: `clear`
 
 ### Exiting the program : `exit`
 
@@ -255,30 +203,21 @@ Exits the program.
 
 Format: `exit`
 
-### Saving of data
+### Saving the data
 
-CCAmper data are saved in the hard disk automatically after any command that changes the data. 
-<br>There is no need to save manually.
-
-<br>
+CCAmper data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/CCAmper.json`. 
-<br>Advanced users are welcome to update data directly by editing that data file.
+CCAmper data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning">
+<box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, CCAmper will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the CCAmper to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
---------------------------------------------------------------------------------------------------------------------
-
-## Planned updates
-
-1. We are planning to integrate an **event list**, which can be used to keep track of weekly session attendance of students.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -286,9 +225,6 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
-**Q**: I would like to report a bug / give feedback for the product. Where can I do so?<br>
-**A**: Please raise an issue on our <a href="https://github.com/AY2526S1-CS2103T-T10-4/tp/issues">GitHub</a> page.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -307,6 +243,6 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​ [t/TAG]…​ [pin/(TRUE/FALSE)] [enroll/[YEAR]] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE] [ece/EMERGENCY_EMAIL]`<br> e.g.,`edit 1 n/John p/98765432 e/johndoe@example.com a/New Place r/Senior Student t/experienced pin/TRUE enroll/2022 ecn/Sally ecp/88887777 ece/sally@example2.com`
-**Find** | `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<\|<=\|>\|>=\|=)NUMBER]] [r/SUBSTRING]…​`<br> e.g., `find n/yu john enroll/>=2022 r/lead r/sec`
+**Find** | `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<\|<=\|>\|>=\|=)NUMBER]]`<br> e.g., `find n/yu john enroll/>=2022`
 **List** | `list`
 **Help** | `help`

@@ -5,7 +5,6 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -19,8 +18,6 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.MultiPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.role.Role;
-import seedu.address.model.role.RolesContainSubstringsPredicate;
 import seedu.address.model.tag.TagsContainKeywordsPredicate;
 
 public class FindCommandParserTest {
@@ -75,34 +72,6 @@ public class FindCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " "
                 + PREFIX_TAG + " \n friend \n \t colleague  \t", expectedFindCommand);
-    }
-
-    @Test
-    public void parse_prefixRoleValidArgs_returnsFindCommand() {
-        // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
-                new FindCommand(new MultiPredicate(Arrays.asList(
-                        new RolesContainSubstringsPredicate(Arrays.asList("section leader", "president")))));
-
-        assertParseSuccess(parser, " " + PREFIX_ROLE + "section leader " + PREFIX_ROLE + "president",
-                expectedFindCommand);
-
-        // multiple whitespaces between tags, leading whitespaces
-        assertParseSuccess(parser, " " + PREFIX_ROLE
-                + "    section leader    " + PREFIX_ROLE + "   president  ", expectedFindCommand);
-
-        FindCommand expectedFindEmptyCommand =
-                new FindCommand(new MultiPredicate(Arrays.asList(
-                        new RolesContainSubstringsPredicate(Arrays.asList("")))));
-
-        // empty substring
-        assertParseSuccess(parser, " " + PREFIX_ROLE, expectedFindEmptyCommand);
-    }
-
-    @Test
-    public void parse_prefixRoleInvalidArgs_failure() {
-        // non alpha numeric value
-        assertParseFailure(parser, " " + PREFIX_ROLE + "(Leader)", Role.FIND_MESSAGE_CONSTRAINTS);
     }
 
     @Test
