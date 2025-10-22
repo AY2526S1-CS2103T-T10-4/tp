@@ -19,9 +19,6 @@ public class ConsolidatePhoneCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Consolidate all distinct students' phone:";
 
-    public static final String ALTERNATE_MESSAGE_SUCCESS = "Nothing to consolidate so far, "
-            + "since no student's data has been entered and stored in CCAmper.";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": consolidate all distinct students' phone numbers currently in address book. \n"
             + "If two students have same phone number, phone number only appears once.";
@@ -32,16 +29,8 @@ public class ConsolidatePhoneCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         HashSet<String> container = new HashSet<>();
-        int counter = 0;
-
         for (Person person : model.getAddressBook().getPersonList()) {
             container.add(person.getPhone().toString());
-            counter = counter + 1;
-        }
-
-        assert counter >= 0 : "The number of contacts cannot be a negative value.";
-        if (counter == 0) {
-            return new CommandResult(ALTERNATE_MESSAGE_SUCCESS);
         }
 
         ArrayList<String> list = new ArrayList<>(container);
