@@ -1,0 +1,28 @@
+@startsalt
+
+'This is the worst displeasure I had to deal with. The syntax is terrible. Bless.'
+'<U+0020> is the unicode for space character. \t is a tab indent. Used for adding padding'
+
+scale 2
+{^<U+0020>MainWindow
+    <U+0020>{+<U+0020><U+0020>CommandBox\t\t\t\t\t\t\t}
+    <U+0020>{+<U+0020><U+0020>ResultDisplay\t\t\t\t\t\t\t}
+    <U+0020>{{^PersonListPanel
+       {#<U+0020><U+0020>PersonCard
+          <U+0020><U+0020>PersonCard
+          <U+0020><U+0020>PersonCard \t\t
+          .
+          .
+          .}} | {^DetailedPanel
+          .
+          .
+          .
+          .
+          .
+          \t\t\t\t<U+0020><U+0020><U+0020><U+0020><U+0020>}
+    }
+    <U+0020>{+<U+0020><U+0020>StatusBarFooter\t\t\t\t\t\t\t} <U+0020>
+    .
+}
+
+@endsalt
