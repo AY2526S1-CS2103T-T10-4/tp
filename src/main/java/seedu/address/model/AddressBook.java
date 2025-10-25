@@ -94,6 +94,21 @@ public class AddressBook implements ReadOnlyAddressBook {
         sort();
     }
 
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeEvent(Event key) {
+        events.remove(key);
+    }
+
+    /**
+     * Clears the event list.
+     */
+    public void clearEvent() {
+        events.clear();
+    }
+
     //// person-level operations
 
     /**
@@ -139,6 +154,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Clears the event list.
+     */
+    public void clearPerson() {
+        persons.clear();
     }
 
     //// sort methods

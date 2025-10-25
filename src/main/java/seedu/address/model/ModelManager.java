@@ -128,6 +128,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void clearPerson() {
+        addressBook.clearPerson();
+    }
+
+    @Override
     public boolean hasEvent(Event event) {
         requireNonNull(event);
         return addressBook.hasEvent(event);
@@ -137,6 +142,16 @@ public class ModelManager implements Model {
     public void addEvent(Event event) {
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         addressBook.addEvent(event);
+    }
+
+    @Override
+    public void deleteEvent(Event target) {
+        addressBook.removeEvent(target);
+    }
+
+    @Override
+    public void clearEvent() {
+        addressBook.clearEvent();
     }
 
     //=========== Filtered Event List Accessors =============================================================

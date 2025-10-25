@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ConsolidateCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -35,6 +37,27 @@ import seedu.address.testutil.PersonUtil;
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
+    private String invalidCommandFormat = "When using %1$s, "
+            + "there should not be any characters (except whitespace, which is allowed) "
+            + "that comes before and/or follow %1$s.";
+
+    private void createInvalidCommandWthOtherCommandWords(String firstCommand) throws ParseException {
+        String invalidCommand = firstCommand + " " + FindCommand.COMMAND_WORD;
+        parser.parseCommand(invalidCommand);
+    }
+
+    private void createInvalidCommandWthRandomWords(String firstCommand) throws ParseException {
+        String invalidCommand = firstCommand + " aab";
+        parser.parseCommand(invalidCommand);
+    }
+
+    private String populateInvalidCommandFormat(String commandWord) {
+        return String.format(invalidCommandFormat, commandWord);
+    }
+
+    private Command createCommandWithSpace(String commandWord) throws ParseException {
+        return parser.parseCommand("  " + commandWord + "    ");
+    }
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -46,8 +69,29 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        assertTrue(createCommandWithSpace(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
     }
+
+    @Test
+    public void parseCommand_invalidClearCommandWithMultipleCommand_throwsParseException() {
+        try {
+            createInvalidCommandWthOtherCommandWords(ClearCommand.COMMAND_WORD);
+            fail(); // test should not reach this line
+        } catch (ParseException e) {
+            assertEquals(populateInvalidCommandFormat(ClearCommand.COMMAND_WORD), e.getMessage());
+        }
+    }
+
+    @Test
+    public void parseCommand_invalidClearCommandWithRandomWord_throwsParseException() {
+        try {
+            createInvalidCommandWthRandomWords(ClearCommand.COMMAND_WORD);
+            fail(); // test should not reach this line
+        } catch (ParseException e) {
+            assertEquals(populateInvalidCommandFormat(ClearCommand.COMMAND_WORD), e.getMessage());
+        }
+    }
+
 
     @Test
     public void parseCommand_delete() throws Exception {
@@ -68,7 +112,27 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+        assertTrue(createCommandWithSpace(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
+    }
+
+    @Test
+    public void parseCommand_invalidExitCommandWithMultipleCommand_throwsParseException() {
+        try {
+            createInvalidCommandWthOtherCommandWords(ExitCommand.COMMAND_WORD);
+            fail(); // test should not reach this line
+        } catch (ParseException e) {
+            assertEquals(populateInvalidCommandFormat(ExitCommand.COMMAND_WORD), e.getMessage());
+        }
+    }
+
+    @Test
+    public void parseCommand_invalidExitCommandWithRandomWord_throwsParseException() {
+        try {
+            createInvalidCommandWthRandomWords(ExitCommand.COMMAND_WORD);
+            fail(); // test should not reach this line
+        } catch (ParseException e) {
+            assertEquals(populateInvalidCommandFormat(ExitCommand.COMMAND_WORD), e.getMessage());
+        }
     }
 
     @Test
@@ -84,13 +148,53 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertTrue(createCommandWithSpace(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
+    }
+
+    @Test
+    public void parseCommand_invalidHelpCommandWithMultipleCommand_throwsParseException() {
+        try {
+            createInvalidCommandWthOtherCommandWords(HelpCommand.COMMAND_WORD);
+            fail(); // test should not reach this line
+        } catch (ParseException e) {
+            assertEquals(populateInvalidCommandFormat(HelpCommand.COMMAND_WORD), e.getMessage());
+        }
+    }
+
+    @Test
+    public void parseCommand_invalidHelpCommandWithRandomWord_throwsParseException() {
+        try {
+            createInvalidCommandWthRandomWords(HelpCommand.COMMAND_WORD);
+            fail(); // test should not reach this line
+        } catch (ParseException e) {
+            assertEquals(populateInvalidCommandFormat(HelpCommand.COMMAND_WORD), e.getMessage());
+        }
     }
 
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(createCommandWithSpace(ListCommand.COMMAND_WORD)instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_invalidListCommandWithMultipleCommand_throwsParseException() {
+        try {
+            createInvalidCommandWthOtherCommandWords(ListCommand.COMMAND_WORD);
+            fail(); // test should not reach this line
+        } catch (ParseException e) {
+            assertEquals(populateInvalidCommandFormat(ListCommand.COMMAND_WORD), e.getMessage());
+        }
+    }
+
+    @Test
+    public void parseCommand_invalidListCommandWithRandomWord_throwsParseException() {
+        try {
+            createInvalidCommandWthRandomWords(ListCommand.COMMAND_WORD);
+            fail(); // test should not reach this line
+        } catch (ParseException e) {
+            assertEquals(populateInvalidCommandFormat(ListCommand.COMMAND_WORD), e.getMessage());
+        }
     }
 
     @Test

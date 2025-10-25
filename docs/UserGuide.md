@@ -244,20 +244,35 @@ Examples:
 
 <br>
 
-### Adding an event: `addevent`
+### Adding an event: `add:event`
 
 Add events to your address book, with the given fields given there are no duplicate events.
 
-Format: `addevent n/NAME d/(d/M/yyyy or d/M/yyyy-d/M/yyyy) [info/DESCRIPTION]`
+Format: `add:event n/NAME d/(d/M/yyyy or d/M/yyyy-d/M/yyyy) [info/DESCRIPTION]`
 
 Examples:
-* `addevent n/meeting d/1/10/2025 info/routine meeting`
+* `add:event n/meeting d/1/10/2025 info/routine meeting`
 
 <box type="definition">
 
 **Note:**
 Events are considered duplicates if they have the same name and duration.
 </box>
+
+<br>
+
+### Deleting an event : `delete:event`
+
+Deletes the event at the specified index. Cannot be undone.
+
+Format: `delete:event INDEX`
+
+* Deletes the event at the specified `INDEX`.
+* The index refers to the index number shown in the currently displayed event list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `delete:event 2` deletes the 2nd event in the displayed event list.
 
 <br>
 
@@ -273,11 +288,20 @@ Format: `consolidate`
 
 <br>
 
-### Clearing all entries : `clear`
+### Clearing all contacts : `clear`
 
 <box type="warning">
 
-**Warning:** Deletes all entries from the address book. Not undoable.
+**Warning:** Deletes all contacts from the address book. Not undoable.
+</box>
+
+<br>
+
+### Clearing all events : `clear:event`
+
+<box type="warning">
+
+**Warning:** Deletes all events from the address book. Not undoable.
 </box>
 
 <br>
@@ -342,6 +366,8 @@ Action     | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​ [t/TAG]…​ [pin/(TRUE/FALSE)] [enroll/[YEAR]] [ecn/EMERGENCY_NAME] [ecp/EMERGENCY_PHONE]`<br> e.g.,`edit 1 n/John p/98765432 e/johndoe@example.com a/New Place r/Senior Student t/experienced pin/TRUE enroll/2022 ecn/Sally ecp/88887777`
 **Find** | `find [n/KEYWORD [MORE_KEYWORDS]] [t/KEYWORD [MORE_KEYWORDS]] [enroll/[(<\|<=\|>\|>=\|=)NUMBER]] [r/SUBSTRING]…​`<br> e.g., `find n/yu john enroll/>=2022 r/lead r/sec`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Add Event** | `addevent n/NAME d/(d/M/yyyy or d/M/yyyy-d/M/yyyy) [info/DESCRIPTION]` <br> e.g., `addevent n/meeting d/1/10/2025 info/routine meeting`
+**Add Event** | `add:event n/NAME d/(d/M/yyyy or d/M/yyyy-d/M/yyyy) [info/DESCRIPTION]` <br> e.g., `add:event n/meeting d/1/10/2025 info/routine meeting`
+**Delete Event** | `delete:event INDEX`<br> e.g., `delete:event 3`
 **Consolidate** | `consolidate`
 **Clear**  | `clear`
+**Clear Events**  | `clear:event`

@@ -5,12 +5,12 @@
 
 scale 2
 {^<U+0020>MainWindow
-    <U+0020>{+<U+0020><U+0020>CommandBox\t\t\t\t\t\t\t}
-    <U+0020>{+<U+0020><U+0020>ResultDisplay\t\t\t\t\t\t\t}
+    <U+0020>{+<U+0020><U+0020>CommandBox\t\t\t\t\t\t\t\t\t\t}
+    <U+0020>{+<U+0020><U+0020>ResultDisplay\t\t\t\t\t\t\t\t\t\t}
     <U+0020>{{^PersonListPanel
        {#<U+0020><U+0020>PersonCard
           <U+0020><U+0020>PersonCard
-          <U+0020><U+0020>PersonCard \t\t
+          <U+0020><U+0020>PersonCard \t
           .
           .
           .}} | {^DetailedPanel
@@ -19,9 +19,17 @@ scale 2
           .
           .
           .
-          \t\t\t\t<U+0020><U+0020><U+0020><U+0020><U+0020>}
+          \t\t\t\t<U+0020><U+0020><U+0020>} | {^EventListPanel
+              {#<U+0020><U+0020>EventCard
+                  <U+0020><U+0020>EventCard
+                  <U+0020><U+0020>EventCard \t\t
+                  .
+                  .
+                  .
+              }
+          }
     }
-    <U+0020>{+<U+0020><U+0020>StatusBarFooter\t\t\t\t\t\t\t} <U+0020>
+    <U+0020>{+<U+0020><U+0020>StatusBarFooter\t\t\t\t\t\t\t\t\t\t} <U+0020>
     .
 }
 

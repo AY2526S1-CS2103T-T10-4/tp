@@ -107,6 +107,14 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Clears the internal list.
+     */
+    public void clear() {
+        selectedPerson.set(null);
+        internalList.clear();
+    }
+
+    /**
      * Sorts the internal list with the order given by the comparator.
      */
     public void sort(Comparator<Person> comparator) {

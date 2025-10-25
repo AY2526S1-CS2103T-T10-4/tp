@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.AddressBook;
 import seedu.address.model.event.Event;
 
 /**
@@ -30,5 +31,16 @@ public class TypicalEvents {
 
     public static List<Event> getTypicalEvents() {
         return new ArrayList<>(Arrays.asList(MEETING, TRAINING, TRAINING_2));
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical events.
+     */
+    public static AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Event event : getTypicalEvents()) {
+            ab.addEvent(event);
+        }
+        return ab;
     }
 }

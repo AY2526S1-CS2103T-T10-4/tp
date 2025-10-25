@@ -98,6 +98,14 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
+     * Clears the internal list.
+     */
+    public void clear() {
+        selectedEvent.set(null);
+        internalList.clear();
+    }
+
+    /**
      * Sorts the internal list with the order given by the comparator.
      */
     public void sort(Comparator<Event> comparator) {
