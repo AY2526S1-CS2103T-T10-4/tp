@@ -121,6 +121,7 @@
         "locating-persons-by-fields-find": "Locating persons by fields: find",
         "deleting-a-person-delete": "Deleting a person : delete",
         "adding-an-event-add-event": "Adding an event: add:event",
+        "editing-an-event-edit-event": "Editing an event : edit:event",
         "deleting-an-event-delete-event": "Deleting an event : delete:event",
         "consolidate-student-info-consolidate": "Consolidate student info : consolidate",
         "clearing-all-contacts-clear": "Clearing all contacts : clear",
