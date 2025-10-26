@@ -123,6 +123,7 @@
         "adding-an-event-add-event": "Adding an event: add:event",
         "editing-an-event-edit-event": "Editing an event : edit:event",
         "deleting-an-event-delete-event": "Deleting an event : delete:event",
+        "listing-events-attended-by-a-student-student-event": "Listing events attended by a student : student:event",
         "consolidate-student-info-consolidate": "Consolidate student info : consolidate",
         "clearing-all-contacts-clear": "Clearing all contacts : clear",
         "clearing-all-events-clear-event": "Clearing all events : clear:event",
