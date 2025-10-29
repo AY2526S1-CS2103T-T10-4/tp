@@ -21,6 +21,7 @@ Class Phone
 Class Tag
 Class EnrollmentYear
 Class EmergencyContact
+Class Role
 
 Class I #FFFFFF
 }
@@ -43,9 +44,10 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> "*" Tag
+Person *--> "0..5" Tag
 Person *--> "0..1" EnrollmentYear
 Person *--> "0..1" EmergencyContact
+Person *--> "0..3" Role
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
