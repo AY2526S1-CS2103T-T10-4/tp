@@ -60,8 +60,6 @@
         "non-functional-requirements": "Non-Functional Requirements",
         "glossary": "Glossary",
         "appendix-planned-enhancements": "Appendix: Planned Enhancements",
-        "better-validation-of-enrollment-year": "Better validation of enrollment year",
-        "better-warning-messages-of-events-contacts-of-similar-names": "Better warning messages of events/contacts of similar names",
         "simplify-the-display-of-consolidate-function": "Simplify the display of consolidate function",
         "specify-whether-error-message-lies-in-phone-number-or-emergency-phone-number": "Specify whether error message lies in phone number or emergency phone number",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
