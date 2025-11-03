@@ -62,6 +62,8 @@
         "appendix-planned-enhancements": "Appendix: Planned Enhancements",
         "better-validation-of-enrollment-year": "Better validation of enrollment year",
         "better-warning-messages-of-events-contacts-of-similar-names": "Better warning messages of events/contacts of similar names",
+        "simplify-the-display-of-consolidate-function": "Simplify the display of consolidate function",
+        "specify-whether-error-message-lies-in-phone-number-or-emergency-phone-number": "Specify whether error message lies in phone number or emergency phone number",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
         "deleting-a-person": "Deleting a person"
@@ -135,6 +137,11 @@
         "saving-of-data": "Saving of data",
         "editing-the-data-file": "Editing the data file",
         "planned-updates": "Planned updates",
+        "better-validation-of-enrollment-year": "Better validation of enrollment year",
+        "better-warning-messages-of-events-contacts-of-similar-names": "Better warning messages of events/contacts of similar names",
+        "simplify-the-display-of-consolidate-function": "Simplify the display of consolidate function",
+        "specify-whether-error-message-lies-in-phone-number-or-emergency-phone-number": "Specify whether error message lies in phone number or emergency phone number",
+        "currently-if-either-phone-number-and-or-emergency-phone-number-is-empty-after-removing-spaces-and-hyphens-the-user-will-receive-an-error-message-that-states-and-quot-phone-number-cannot-be-empty-after-removing-spaces-and-hyphens-and-quot-this-is-currently-not-a-major-priority-since-users-can-easily-locate-the-source-s-of-errors-by-checking-up-to-2-fields-only": "Currently, if either phone number and/or emergency phone number is empty after removing spaces and hyphens,\nthe user will receive an error message that states &quot;Phone number cannot be empty after removing spaces and hyphens.&quot;\nThis is currently not a major priority, since users can easily locate the source(s) of errors by checking up to 2 fields only.",
         "faq": "FAQ",
         "known-issues": "Known issues",
         "command-summary": "Command summary"
