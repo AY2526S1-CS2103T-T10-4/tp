@@ -66,7 +66,11 @@
         "specify-whether-error-message-lies-in-phone-number-or-emergency-phone-number": "Specify whether error message lies in phone number or emergency phone number",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
-        "deleting-a-person": "Deleting a person"
+        "adding-a-person": "Adding a person",
+        "deleting-a-person": "Deleting a person",
+        "adding-an-event": "Adding an event",
+        "persistence-of-data": "Persistence of data",
+        "attending-and-unattending-events": "Attending and unattending events"
       },
       "headingKeywords": {}
     },
@@ -119,7 +123,7 @@
         "invalid-commands": "Invalid Commands",
         "viewing-help-help": "Viewing help : help",
         "adding-a-person-add": "Adding a person: add",
-        "listing-all-persons-list": "Listing all persons : list",
+        "listing-all-persons-and-events-list": "Listing all persons and events : list",
         "editing-a-person-edit": "Editing a person : edit",
         "locating-persons-by-fields-find": "Locating persons by fields: find",
         "deleting-a-person-delete": "Deleting a person : delete",
